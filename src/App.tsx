@@ -628,15 +628,15 @@ export default function App() {
     try {
       if (firebaseConnected) {
         await deleteDoc(doc(db, 'resources', resource.id));
-        if (resource.storagePath) {
-          try { await deleteObject(ref(storage, resource.storagePath)); } catch { }
-        }
-        showToast('Document supprimé', 'info');
-      } else {
-        setResources(prev => prev.filter(r => r.id !== resource.id));
-        showToast('Document supprimé', 'info');
+        // ملحوظة: Cloudinary ما كيتمسحش بـ deleteObject حيت ماشي Firebase Storage
       }
+      
+      // هاد السطر هو السر: كيتمسح من الشاشة فالحين
+      setResources(prev => prev.filter(r => r.id !== resource.id));
+      showToast('Document supprimé', 'info');
+      
     } catch (err: any) {
+      console.error(err);
       showToast('Erreur suppression', 'error');
     }
   };
@@ -644,17 +644,15 @@ export default function App() {
   const handleDeleteAnnouncement = async (id: string) => {
     try {
       if (firebaseConnected) {
-        const ann = announcements.find(a => a.id === id);
         await deleteDoc(doc(db, 'announcements', id));
-        if (ann?.imageStoragePath) {
-          try { await deleteObject(ref(storage, ann.imageStoragePath)); } catch { }
-        }
-        showToast('Annonce supprimée', 'info');
-      } else {
-        setAnnouncements(prev => prev.filter(a => a.id !== id));
-        showToast('Annonce supprimée', 'info');
       }
+      
+      // كيمسح الإعلان من الشاشة فالحين
+      setAnnouncements(prev => prev.filter(a => a.id !== id));
+      showToast('Annonce supprimée', 'info');
+      
     } catch (err: any) {
+      console.error(err);
       showToast('Erreur suppression', 'error');
     }
   };
