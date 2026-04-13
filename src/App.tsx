@@ -93,8 +93,6 @@ const DEMO_RESOURCES: Resource[] = [
 ];
 
 const DEMO_ANNOUNCEMENTS: Announcement[] = [
-  { id: '1', title: 'Report du cours de Droit', content: 'Le cours de Droit Commercial de M. BELLAMIN prévu ce mercredi est reporté à vendredi 14h.', date: '2024-03-12', priority: 'Urgent', author: 'Administration' },
-  { id: '2', title: 'Rappel TP Culture digitale', content: "N'oubliez pas de préparer vos machines pour le TP avec Mr MOUHCINE cette semaine.", date: '2024-03-11', priority: 'Important', author: 'Département' }
 ];
 
 // =======================================================
