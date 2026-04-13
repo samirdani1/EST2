@@ -209,7 +209,7 @@ export default function App() {
   const [announcements, setAnnouncements] = useState<Announcement[]>(DEMO_ANNOUNCEMENTS);
   const [searchQuery, setSearchQuery] = useState('');
   const [resourceFilter, setResourceFilter] = useState<'Tous' | ResourceType>('Tous');
-  const [firebaseConnected, setFirebaseConnected] = useState(false);
+  const [firebaseConnected, setFirebaseConnected] = useState(true);
 
   // --- Filière State ---
   const [filieres, setFilieres] = useState<Filiere[]>(DEFAULT_FILIERES);
