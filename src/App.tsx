@@ -884,20 +884,22 @@ export default function App() {
     }
   };
 
-  const handleDeleteFiliere = async (filiereId: string) => {
-    try {
-      if (firebaseConnected) {
-        await deleteDoc(doc(db, 'filieres', filiereId));
-        showToast('Filière supprimée', 'info');
-      } else {
-        setFilieres(prev => prev.filter(f => f.id !== filiereId));
-        setScheduleByFiliere((prev) => {
-          const next = { ...prev };
-          delete next[filiereId];
-          return next;
-        });
-        showToast('Filière supprimée', 'info');
-      }
+const handleDeleteFiliere = async (id: string) => {
+  try {
+    if (firebaseConnected) {
+      // 1. كيمسح من Firebase
+      await deleteDoc(doc(db, 'filieres', id));
+    }
+
+    // 2. هاد السطر هو اللي كيغبرها من الشاشة فالبلاصة
+    setFilieres(prev => prev.filter(f => f.id !== id));
+
+    showToast('Filière supprimée', 'info');
+  } catch (error) {
+    console.error(error);
+    showToast('Erreur suppression', 'error');
+  }
+};
 
       if (selectedFiliere === filiereId) setSelectedFiliere('');
       if (resourceFiliere === filiereId) setResourceFiliere('');
