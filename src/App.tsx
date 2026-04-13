@@ -235,72 +235,72 @@ export default function App() {
   // ===================================================
   // 🔥 FIRESTORE - Resources
   // ===================================================
-  useEffect(() => {
-    try {
-      const q = query(collection(db, 'resources'), orderBy('createdAt', 'desc'));
-      const unsubscribe = onSnapshot(q,
-        (snapshot) => {
-          setFirebaseConnected(true);
-          if (!snapshot.empty) {
-            const docs: Resource[] = snapshot.docs.map(d => {
-              const data = d.data();
-              return {
-                id: d.id,
-                title: data.title || '',
-                type: data.type || 'Cours',
-                subject: data.subject || '',
-                professor: data.professor || '',
-                filiereId: data.filiereId || '',
-                filiereName: data.filiereName || '',
-                date: data.date || '',
-                size: data.size || '',
-                downloads: data.downloads || 0,
-                pdfUrl: data.pdfUrl || '',
-                storagePath: data.storagePath || ''
-              };
-            });
-            setResources(docs);
-          }
-        },
-      () => {}
-    );
-      return () => unsubscribe();
-     } catch (error) {
-  console.error("الخطأ الحقيقي ديال Firebase هو: ", error);
-}
+ useEffect(() => {
+    // 1. كنجيبو المعلومات من Firestore
+    const q = query(collection(db, 'resources'), orderBy('createdAt', 'desc'));
+    
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setFirebaseConnected(true);
+      
+      // 2. كنحولوا الداتا ديما سواء كانت خاوية ولا عامرة
+      const docs: Resource[] = snapshot.docs.map(d => {
+        const data = d.data();
+        return {
+          id: d.id,
+          title: data.title || '',
+          type: data.type || 'Cours',
+          subject: data.subject || '',
+          professor: data.professor || '',
+          filiereId: data.filiereId || '',
+          filiereName: data.filiereName || '',
+          date: data.date || '',
+          size: data.size || '',
+          downloads: data.downloads || 0,
+          pdfUrl: data.pdfUrl || '',
+          storagePath: data.storagePath || ''
+        };
+      });
+
+      // 3. كنحدثوا الشاشة فالبلاصة
+      setResources(docs);
+    }, (error) => {
+      console.error("Firebase Snapshot Error: ", error);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   // ===================================================
   // 🔥 FIRESTORE - Announcements
   // ===================================================
   useEffect(() => {
-    try {
-      const q = query(collection(db, 'announcements'), orderBy('createdAt', 'desc'));
-      const unsubscribe = onSnapshot(q,
-        (snapshot) => {
-          if (!snapshot.empty) {
-            const docs: Announcement[] = snapshot.docs.map(d => {
-              const data = d.data();
-              return {
-                id: d.id,
-                title: data.title || '',
-                content: data.content || '',
-                date: data.date || '',
-                priority: data.priority || 'Info',
-                author: data.author || '',
-                imageUrl: data.imageUrl || '',
-                imageStoragePath: data.imageStoragePath || ''
-              };
-            });
-            setAnnouncements(docs);
-          }
-        },
-        () => { }
-      );
-      return () => unsubscribe();
-    } catch { }
-  }, []);
+    // 1. كنجيبو الإعلانات مرتبة من الأحدث للأقدم
+    const q = query(collection(db, 'announcements'), orderBy('createdAt', 'desc'));
+    
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      // 2. كنحولوا الداتا ديما (حيدنا if !snapshot.empty باش التحديث يكون فوري)
+      const docs: Announcement[] = snapshot.docs.map(d => {
+        const data = d.data();
+        return {
+          id: d.id,
+          title: data.title || '',
+          content: data.content || '',
+          date: data.date || '',
+          priority: data.priority || 'Info',
+          author: data.author || '',
+          imageUrl: data.imageUrl || '',
+          imageStoragePath: data.imageStoragePath || ''
+        };
+      });
 
+      // 3. كنحدثوا الليستة فالبلاصة، إلا كانت خاوية فـ Firebase غتخوا حتى فالسيت
+      setAnnouncements(docs);
+    }, (error) => {
+      console.error("Announcements Error: ", error);
+    });
+
+    return () => unsubscribe();
+  }, []);
   // ===================================================
   // 🔥 FIRESTORE - Filières
   // ===================================================
