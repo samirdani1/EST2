@@ -318,12 +318,12 @@ export default function App() {
             setResources(docs);
           }
         },
-        () => setFirebaseConnected(false)
+        () => 
       );
       return () => unsubscribe();
-    } catch {
-      setFirebaseConnected(false);
-    }
+     } catch (error) {
+  console.error("الخطأ الحقيقي ديال Firebase هو: ", error);
+}
   }, []);
 
   // ===================================================
