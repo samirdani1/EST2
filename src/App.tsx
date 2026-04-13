@@ -318,8 +318,8 @@ export default function App() {
             setResources(docs);
           }
         },
-        () => 
-      );
+      () => {}
+    );
       return () => unsubscribe();
      } catch (error) {
   console.error("الخطأ الحقيقي ديال Firebase هو: ", error);
