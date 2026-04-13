@@ -90,60 +90,6 @@ interface Announcement {
 // --- Démo Data ---
 const DEMO_RESOURCES: Resource[] = [
   // ===== SECTION A: Cours =====
-  { id: '1', title: 'Chapitre 1: Introduction au Droit Commercial', type: 'Cours', subject: 'Droit Commercial', professor: 'M. BELLAMIN', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-10', size: '2.4 MB', downloads: 124, pdfUrl: '' },
-  { id: '4', title: 'Chapitre 2: Le Marché financier', type: 'Cours', subject: 'Environnement bancaire', professor: 'M. TOUZANI', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-07', size: '4.2 MB', downloads: 210, pdfUrl: '' },
-  { id: '30', title: 'Chapitre 3: Communication commerciale', type: 'Cours', subject: 'Communication commerciale', professor: 'M. HANOUF', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-15', size: '3.1 MB', downloads: 178, pdfUrl: '' },
-  // ===== SECTION A: TD =====
-  { id: '2', title: 'Série 1: Statistiques descriptives', type: 'TD', subject: 'Statistiques', professor: 'M. LAISSAOUI', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-09', size: '1.1 MB', downloads: 89, pdfUrl: '' },
-  { id: '31', title: 'Série 2: Loi normale et variables', type: 'TD', subject: 'Statistiques', professor: 'M. LAISSAOUI', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-16', size: '1.3 MB', downloads: 102, pdfUrl: '' },
-  // ===== SECTION A: TP =====
-  { id: '32', title: 'TP 1: Word & mise en page', type: 'TP', subject: 'Culture digitale', professor: 'Mr OURAMMOU', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-08', size: '2.0 MB', downloads: 95, pdfUrl: '' },
-  { id: '33', title: 'TP 2: Formules Excel', type: 'TP', subject: 'Culture digitale', professor: 'Mr OURAMMOU', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-22', size: '2.5 MB', downloads: 115, pdfUrl: '' },
-  // ===== SECTION A: QCM =====
-  { id: '7', title: 'QCM Chapitre 1-3: Statistiques', type: 'QCM', subject: 'Statistiques', professor: 'M. LAISSAOUI', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-12', size: '0.8 MB', downloads: 312, pdfUrl: '' },
-  { id: '34', title: 'QCM Droit Commercial - Partie 1', type: 'QCM', subject: 'Droit Commercial', professor: 'M. BELLAMIN', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-18', size: '0.6 MB', downloads: 245, pdfUrl: '' },
-  { id: '35', title: 'QCM Marketing & Enquête', type: 'QCM', subject: 'Marketing', professor: 'M. SADIK', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-03-20', size: '0.7 MB', downloads: 189, pdfUrl: '' },
-  { id: '36', title: 'QCM Communication commerciale', type: 'QCM', subject: 'Communication commerciale', professor: 'M. HANOUF', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2024-04-01', size: '0.5 MB', downloads: 156, pdfUrl: '' },
-  // ===== SECTION A: Ancien Examen =====
-  { id: '9', title: 'Examen Final Droit Commercial 2023', type: 'Ancien Examen', subject: 'Droit Commercial', professor: 'M. BELLAMIN', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2023-06-15', size: '2.1 MB', downloads: 450, pdfUrl: '' },
-  { id: '37', title: 'Examen Final Statistiques 2023', type: 'Ancien Examen', subject: 'Statistiques', professor: 'M. LAISSAOUI', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2023-06-18', size: '1.8 MB', downloads: 520, pdfUrl: '' },
-  { id: '38', title: 'Rattrapage Marketing 2023', type: 'Ancien Examen', subject: 'Marketing', professor: 'M. SADIK', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2023-07-05', size: '1.6 MB', downloads: 380, pdfUrl: '' },
-  { id: '39', title: 'Examen Banque et Finance 2022', type: 'Ancien Examen', subject: 'Environnement bancaire', professor: 'M. TOUZANI', filiereId: 'tm-fba-a', filiereName: 'Techniques de Management - FBA (Section A)', date: '2022-06-20', size: '2.0 MB', downloads: 290, pdfUrl: '' },
-
-  // ===== SECTION B: Cours =====
-  { id: '40', title: 'Chapitre 1: Comptabilité générale', type: 'Cours', subject: 'Comptabilité générale', professor: 'M. ED-DAOU', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2024-03-05', size: '3.8 MB', downloads: 165, pdfUrl: '' },
-  { id: '41', title: 'Chapitre 2: Les obligations', type: 'Cours', subject: 'Droit Commercial', professor: 'M. BELLAMIN', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2024-03-12', size: '2.9 MB', downloads: 142, pdfUrl: '' },
-  // ===== SECTION B: TD =====
-  { id: '42', title: 'TD 1: Bilan et CPC', type: 'TD', subject: 'Comptabilité générale', professor: 'M. ED-DAOU', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2024-03-14', size: '1.4 MB', downloads: 98, pdfUrl: '' },
-  // ===== SECTION B: TP =====
-  { id: '3', title: 'TP 1: Création site vitrine', type: 'TP', subject: 'Culture digitale', professor: 'Mr OURAMMOU', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2024-03-08', size: '3.5 MB', downloads: 156, pdfUrl: '' },
-  { id: '6', title: 'TP 2: Initiation Excel', type: 'TP', subject: 'Culture digitale', professor: 'Mr MOUHCINE', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2024-03-05', size: '1.5 MB', downloads: 145, pdfUrl: '' },
-  // ===== SECTION B: QCM =====
-  { id: '43', title: 'QCM Comptabilité - Les écritures', type: 'QCM', subject: 'Comptabilité générale', professor: 'M. ED-DAOU', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2024-03-20', size: '0.7 MB', downloads: 201, pdfUrl: '' },
-  { id: '44', title: 'QCM Culture digitale', type: 'QCM', subject: 'Culture digitale', professor: 'Mr MOUHCINE', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2024-03-25', size: '0.5 MB', downloads: 178, pdfUrl: '' },
-  { id: '45', title: 'QCM Droit des obligations', type: 'QCM', subject: 'Droit Commercial', professor: 'M. BELLAMIN', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2024-04-02', size: '0.6 MB', downloads: 134, pdfUrl: '' },
-  // ===== SECTION B: Ancien Examen =====
-  { id: '46', title: 'Examen Final Comptabilité 2023', type: 'Ancien Examen', subject: 'Comptabilité générale', professor: 'M. ED-DAOU', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2023-06-22', size: '1.9 MB', downloads: 410, pdfUrl: '' },
-  { id: '47', title: 'Examen Culture digitale 2023', type: 'Ancien Examen', subject: 'Culture digitale', professor: 'Mr MOUHCINE', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2023-06-25', size: '1.5 MB', downloads: 350, pdfUrl: '' },
-  { id: '48', title: 'Rattrapage Droit 2022', type: 'Ancien Examen', subject: 'Droit Commercial', professor: 'M. BELLAMIN', filiereId: 'tm-fba-b', filiereName: 'Techniques de Management - FBA (Section B)', date: '2022-07-10', size: '1.7 MB', downloads: 275, pdfUrl: '' },
-
-  // ===== GESTION: Cours =====
-  { id: '50', title: 'Chapitre 1: Management des organisations', type: 'Cours', subject: 'Management des organisations', professor: 'M. EL AMRANI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2024-03-04', size: '3.2 MB', downloads: 189, pdfUrl: '' },
-  { id: '51', title: 'Chapitre 2: Finance d\'entreprise', type: 'Cours', subject: 'Finance d\'entreprise', professor: 'M. TOUZANI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2024-03-11', size: '4.0 MB', downloads: 167, pdfUrl: '' },
-  // ===== GESTION: TD =====
-  { id: '5', title: 'Série 2: Probabilités', type: 'TD', subject: 'Statistiques', professor: 'M. NAAMANE', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2024-03-06', size: '1.8 MB', downloads: 67, pdfUrl: '' },
-  { id: '52', title: 'TD Management: Études de cas', type: 'TD', subject: 'Management des organisations', professor: 'M. EL AMRANI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2024-03-18', size: '1.5 MB', downloads: 78, pdfUrl: '' },
-  // ===== GESTION: TP =====
-  { id: '53', title: 'TP Informatique de gestion', type: 'TP', subject: 'Informatique de gestion', professor: 'M. DAHMOUNI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2024-03-15', size: '2.8 MB', downloads: 120, pdfUrl: '' },
-  // ===== GESTION: QCM =====
-  { id: '8', title: 'QCM Révision Marketing', type: 'QCM', subject: 'Marketing', professor: 'M. SADIK', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2024-03-11', size: '0.9 MB', downloads: 210, pdfUrl: '' },
-  { id: '54', title: 'QCM Management - Chapitre 1 à 4', type: 'QCM', subject: 'Management des organisations', professor: 'M. EL AMRANI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2024-03-22', size: '0.8 MB', downloads: 195, pdfUrl: '' },
-  { id: '55', title: 'QCM Finance d\'entreprise', type: 'QCM', subject: 'Finance d\'entreprise', professor: 'M. TOUZANI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2024-04-05', size: '0.6 MB', downloads: 167, pdfUrl: '' },
-  // ===== GESTION: Ancien Examen =====
-  { id: '10', title: 'Rattrapage Banque 2022', type: 'Ancien Examen', subject: 'Environnement bancaire', professor: 'M. TOUZANI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2022-07-02', size: '1.5 MB', downloads: 320, pdfUrl: '' },
-  { id: '56', title: 'Examen Final Management 2023', type: 'Ancien Examen', subject: 'Management des organisations', professor: 'M. EL AMRANI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2023-06-20', size: '2.3 MB', downloads: 445, pdfUrl: '' },
-  { id: '57', title: 'Examen Statistiques S2 2022', type: 'Ancien Examen', subject: 'Statistiques', professor: 'M. NAAMANE', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2022-06-18', size: '1.9 MB', downloads: 380, pdfUrl: '' },
-  { id: '58', title: 'Rattrapage Finance 2023', type: 'Ancien Examen', subject: 'Finance d\'entreprise', professor: 'M. TOUZANI', filiereId: 'tm-gestion', filiereName: 'Techniques de Management - Gestion', date: '2023-07-08', size: '1.6 MB', downloads: 290, pdfUrl: '' }
 ];
 
 const DEMO_ANNOUNCEMENTS: Announcement[] = [
