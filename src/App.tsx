@@ -883,29 +883,25 @@ export default function App() {
       showToast('Erreur', 'error');
     }
   };
-
 const handleDeleteFiliere = async (id: string) => {
-  try {
-    if (firebaseConnected) {
-      // 1. كيمسح من Firebase
-      await deleteDoc(doc(db, 'filieres', id));
-    }
+    try {
+      // 1. المسح من قاعدة البيانات
+      if (firebaseConnected) {
+        await deleteDoc(doc(db, 'filieres', id));
+      }
 
-    // 2. هاد السطر هو اللي كيغبرها من الشاشة فالبلاصة
-    setFilieres(prev => prev.filter(f => f.id !== id));
+      // 2. المسح من الشاشة (هادا هو اللي كيغبرها فالبلاصة)
+      setFilieres(prev => prev.filter(f => f.id !== id));
+      
+      // 3. تنظيف الاختيارات (باش ميبقاش السيت معلق على شعبة ممسوحة)
+      if (selectedFiliere === id) setSelectedFiliere('');
+      if (resourceFiliere === id) setResourceFiliere('');
+      if (publishFiliere === id) setPublishFiliere('');
 
-    showToast('Filière supprimée', 'info');
-  } catch (error) {
-    console.error(error);
-    showToast('Erreur suppression', 'error');
-  }
-};
-
-      if (selectedFiliere === filiereId) setSelectedFiliere('');
-      if (resourceFiliere === filiereId) setResourceFiliere('');
-      if (publishFiliere === filiereId) setPublishFiliere('');
-    } catch (err: any) {
-      showToast('Erreur', 'error');
+      showToast('Filière supprimée', 'info');
+    } catch (error) {
+      console.error(error);
+      showToast('Erreur suppression', 'error');
     }
   };
 
