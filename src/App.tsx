@@ -494,67 +494,51 @@ export default function App() {
     setIsUploading(true);
     setUploadProgress(0);
 
-    try {
-      if (firebaseConnected) {
-        const fileName = `${Date.now()}_${selectedPdf.name}`;
-        const storageRef = ref(storage, `pdfs/${newType}/${fileName}`);
-        const uploadTask = uploadBytesResumable(storageRef, selectedPdf);
+   try {
+      if (!selectedPdf) return;
 
-        await new Promise<void>((resolve, reject) => {
-          uploadTask.on('state_changed',
-            (snapshot) => {
-              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              setUploadProgress(Math.round(progress));
-            },
-            (error) => reject(error),
-            async () => {
-              const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-              await addDoc(collection(db, 'resources'), {
-                title: newTitle,
-                type: newType,
-                subject: newSubject,
-                professor: newProfessor,
-                filiereId: publishFiliere,
-                filiereName: selectedPublishFiliere?.name || '',
-                date: new Date().toISOString().split('T')[0],
-                size: (selectedPdf!.size / (1024 * 1024)).toFixed(1) + ' MB',
-                downloads: 0,
-                pdfUrl: downloadURL,
-                storagePath: `pdfs/${newType}/${fileName}`,
-                createdAt: serverTimestamp(),
-                uploadedBy: firebaseUser?.email || 'admin'
-              });
-              resolve();
-            }
-          );
-        });
-        showToast(`✅ ${newType} publié sur Firebase !`);
-      } else {
-        await new Promise(r => {
-          let p = 0;
-          const interval = setInterval(() => {
-            p += 15;
-            setUploadProgress(Math.min(p, 100));
-            if (p >= 100) { clearInterval(interval); r(undefined); }
-          }, 100);
-        });
-        const pdfUrl = URL.createObjectURL(selectedPdf);
-        const newDoc: Resource = {
-          id: Date.now().toString(),
-          title: newTitle,
-          type: newType,
-          subject: newSubject,
-          professor: newProfessor,
-          filiereId: publishFiliere,
-          filiereName: selectedPublishFiliere?.name || '',
-          date: new Date().toISOString().split('T')[0],
-          size: (selectedPdf.size / (1024 * 1024)).toFixed(1) + ' MB',
-          downloads: 0,
-          pdfUrl
-        };
-        setResources(prev => [newDoc, ...prev]);
-        showToast(`✅ ${newType} publié (mode démo)`);
-      }
+      // 1. تحديد نوع الملف (تصويرة ولا PDF)
+      const isImage = selectedPdf.type.startsWith('image/');
+      const uploadType = isImage ? 'image' : 'raw';
+
+      const formData = new FormData();
+      formData.append('file', selectedPdf);
+      formData.append('upload_preset', 'verratti_vip'); // الـ Preset ديالك
+
+      setUploadProgress(20);
+
+      // 2. الرفع لـ Cloudinary باستخدام الـ Cloud Name ديالك: do7kxcqtg
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/do7kxcqtg/${uploadType}/upload`,
+        { method: 'POST', body: formData }
+      );
+
+      if (!response.ok) throw new Error('Cloudinary Upload Failed');
+
+      const data = await response.json();
+      const downloadURL = data.secure_url;
+      setUploadProgress(80);
+
+      // 3. التسجيل في Firestore (قاعدة البيانات الحقيقية)
+      await addDoc(collection(db, 'resources'), {
+        title: newTitle,
+        type: newType,
+        subject: newSubject,
+        professor: newProfessor,
+        filiereId: publishFiliere,
+        filiereName: selectedPublishFiliere?.name || '',
+        date: new Date().toISOString().split('T')[0],
+        size: (selectedPdf.size / (1024 * 1024)).toFixed(1) + ' MB',
+        downloads: 0,
+        pdfUrl: downloadURL, 
+        fileType: isImage ? 'image' : 'pdf',
+        createdAt: serverTimestamp(),
+        uploadedBy: firebaseUser?.email || 'admin'
+      });
+
+      setUploadProgress(100);
+      showToast(`✅ ${newType} publié avec succès !`);
+
     } catch (err: any) {
       console.error('Upload error:', err);
       showToast('Erreur lors de la publication', 'error');
