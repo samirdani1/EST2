@@ -1,20 +1,13 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore'; // رجعنا Firestore
+import { 
+  getAuth, 
+  GoogleAuthProvider, 
+  setPersistence, 
+  browserLocalPersistence 
+} from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getAnalytics } from "firebase/analytics";
-
-// ============================================================
-// 🔥 CONFIGURATION FIREBASE - ESTM PORTAIL
-// ============================================================
-// Pour configurer votre propre projet Firebase :
-// 1. Allez sur https://console.firebase.google.com
-// 2. Créez un nouveau projet
-// 3. Activez Authentication (Google Provider)
-// 4. Activez Firestore Database
-// 5. Activez Storage
-// 6. Copiez votre config et remplacez ci-dessous
-// ============================================================
 
 const firebaseConfig = {
   apiKey: "AIzaSyDRlFZwIFCjtilAR_nsdEeixGR3etScw6A",
@@ -29,16 +22,23 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
 // Services
 export const auth = getAuth(app);
-export const db = getFirestore(app); // رجعناها db ديال Firestore
+export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const googleProvider = new GoogleAuthProvider();
 
-// Force account selection each time
+// هاد الجزء هو اللي كيخلي السيت يعقل عليك فالتليفون
+setPersistence(auth, browserLocalPersistence)
+  .catch((error) => {
+    console.error("Persistence error:", error);
+  });
+
+// Force account selection only if needed
 googleProvider.setCustomParameters({
-  prompt: 'select_account',
-  hd: 'edu.umi.ac.ma' // Restrict to this domain in Google popup
+  // حيدنا 'select_account' باش ميبقاش يبرزطك ديما إلا كنتي ديجا داخل
+  hd: 'edu.umi.ac.ma' 
 });
 
 export default app;
