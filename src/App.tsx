@@ -358,7 +358,7 @@ export default function App() {
     }
 
     const filiereDefaultSchedule = filieres.find((f) => f.id === selectedFiliere)?.schedules || DEFAULT_SCHEDULE;
-    setEditingSchedule(scheduleByFiliere[selectedFiliere] || filiereDefaultSchedule);
+  setEditingSchedule(scheduleByFiliere[selectedFiliere] || DAYS.map(day => ({ day, courses: [] })));
   }, [selectedFiliere, scheduleByFiliere, filieres]);
 
   // ===================================================
